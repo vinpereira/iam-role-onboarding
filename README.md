@@ -7,10 +7,11 @@ console with a quick-create stack (the client must already be logged in to their
 | Button | Creates | Permissions |
 |---|---|---|
 | Create Admin Role | `<short>AdminRole` | `AdministratorAccess` + `job-function/Billing` |
-| Create ReadOnly Role | `<short>ReadOnlyRole` | `ReadOnlyAccess` + `AWSBillingReadOnlyAccess` + cost optimization opt-ins |
+| Create ReadOnly Role | `<short>ReadOnlyRole` | `ReadOnlyAccess` + `AWSBillingReadOnlyAccess` (strictly read-only) |
+| Create Enablement Role | `<short>CostOptimizationEnablementRole` | Inline policy only: opt-in to Compute Optimizer and Cost Optimization Hub (incl. their service-linked roles) and cost allocation tags, plus read access to their enrollment status. One-time use — the client can delete the stack afterwards |
 | Enable Billing Access | — | Opens the Billing console so the root user can activate IAM access to billing information |
 
-Both roles trust the company's own AWS account.
+All roles trust the company's own AWS account.
 
 There is no build step, template engine, or infra-as-code. `index.html` and `templates/*.yaml` are
 the exact files that get uploaded to S3 — see [Configure](#configure) for how a company's name and
@@ -68,7 +69,7 @@ make configure COMPANY_NAME="Acme Cloud" SHORT_NAME=Acme \
 | Flag | Used for |
 |---|---|
 | `--company-name` | Shown on the page and in role `Description` fields |
-| `--short-name` | Alphanumeric only — used in role names (`AcmeAdminRole`) and the stack name |
+| `--short-name` | Alphanumeric only, at most 34 characters — used in role names (`AcmeAdminRole`) and the stack name |
 | `--account-id` | Your own 12-digit AWS account ID — the one the roles will trust |
 | `--bucket` | The S3 bucket that will host this page (see Deploy below) |
 | `--region` | AWS region of that bucket (default `eu-central-1`) |

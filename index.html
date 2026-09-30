@@ -90,9 +90,10 @@
       margin-bottom: 0.6rem;
     }
 
-    .card p {
+    .card p,
+    .setup-section p {
       font-size: 0.95rem;
-      color: #777;
+      color: #6b6b6b;
       margin-bottom: 1.5rem;
       line-height: 1.5;
     }
@@ -130,6 +131,17 @@
       border-color: #e8833a;
     }
 
+    .btn-enablement {
+      background: #fff;
+      color: #1a1a2e;
+      border-color: #e8833a;
+    }
+
+    .btn-enablement:hover {
+      background: #e8833a;
+      color: #fff;
+    }
+
     .billing-section {
       background: #fff;
       border-radius: 16px;
@@ -143,6 +155,10 @@
       font-weight: 600;
       color: #1a1a2e;
       margin-bottom: 0.6rem;
+    }
+
+    .setup-section {
+      margin-bottom: 2.5rem;
     }
 
     .billing-section .btn-billing {
@@ -240,7 +256,7 @@
 
       <div class="card">
         <h3>Read-Only Role</h3>
-        <p>Read-only access for __COMPANY_NAME__ monitoring, billing visibility, and cost optimization analysis of your AWS resources.</p>
+        <p>Read-only access for __COMPANY_NAME__ monitoring, billing visibility, and cost optimization analysis of your AWS resources. It cannot change anything in your account.</p>
         <a
           class="btn btn-readonly"
           href="https://__REGION__.console.aws.amazon.com/cloudformation/home?region=__REGION__#/stacks/create/review?templateURL=https://__BUCKET_NAME__.s3.__REGION__.amazonaws.com/templates/readonly-role.yaml&stackName=__COMPANY_SHORT_NAME__-ReadOnly-Role"
@@ -250,6 +266,24 @@
           Create ReadOnly Role
         </a>
       </div>
+    </div>
+
+    <div class="billing-section setup-section">
+      <h3>Cost Optimization Enablement</h3>
+      <p>
+        One-time setup that lets __COMPANY_NAME__ turn on AWS Compute Optimizer, Cost Optimization Hub,
+        and cost allocation tags in your account. It can only turn these tools on: it cannot read or
+        change your resources, and it has no access to payments.
+        Once we confirm the tools are enabled, you can delete the stack.
+      </p>
+      <a
+        class="btn btn-enablement"
+        href="https://__REGION__.console.aws.amazon.com/cloudformation/home?region=__REGION__#/stacks/create/review?templateURL=https://__BUCKET_NAME__.s3.__REGION__.amazonaws.com/templates/cost-optimization-enablement-role.yaml&stackName=__COMPANY_SHORT_NAME__-CostOptimizationEnablement-Role"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Create Enablement Role
+      </a>
     </div>
 
     <div class="billing-section">

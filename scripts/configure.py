@@ -24,7 +24,11 @@ FILES = [
     REPO_ROOT / "index.html",
     REPO_ROOT / "templates" / "admin-role.yaml",
     REPO_ROOT / "templates" / "readonly-role.yaml",
+    REPO_ROOT / "templates" / "cost-optimization-enablement-role.yaml",
 ]
+
+# IAM role names are limited to 64 characters; the longest suffix is "CostOptimizationEnablementRole" (30)
+MAX_SHORT_NAME_LENGTH = 34
 
 
 def main() -> None:
@@ -48,6 +52,11 @@ def main() -> None:
 
     if not re.fullmatch(r"[A-Za-z0-9]+", args.short_name):
         sys.exit("--short-name must contain only letters and digits (used in IAM role names)")
+    if len(args.short_name) > MAX_SHORT_NAME_LENGTH:
+        sys.exit(
+            f"--short-name must be at most {MAX_SHORT_NAME_LENGTH} characters "
+            "(IAM role names are limited to 64 characters)"
+        )
     if not re.fullmatch(r"\d{12}", args.account_id):
         sys.exit("--account-id must be a 12-digit AWS account ID")
 

@@ -5,6 +5,29 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-09-30
+
+### Added
+- `templates/cost-optimization-enablement-role.yaml` and a "Create Enablement Role" button: a
+  separate, one-time-use role (`<short>CostOptimizationEnablementRole`) that holds the write
+  actions needed to enable Compute Optimizer, Cost Optimization Hub, and cost allocation tags
+- `scripts/configure.py`: rejects `--short-name` values longer than 34 characters, which would
+  produce IAM role names above the 64-character limit
+
+### Changed
+- ReadOnly role card copy on the page now states it cannot change anything in the account
+- Enablement section copy on the page states precisely what the role can do; darker text color on
+  card descriptions for better contrast
+
+### Security
+- ReadOnly role: removed the inline policy `<short>CostOptimizationEnablement`, so the role is now
+  strictly read-only (`ReadOnlyAccess` + `AWSBillingReadOnlyAccess`). Its write actions moved,
+  unchanged, to the new enablement role. Stacks already created from an earlier version keep the
+  old inline policy until they are updated or recreated
+- Enablement role: added read access to the enrollment status of Compute Optimizer, Cost
+  Optimization Hub, and cost allocation tags (`GetEnrollmentStatus`, `ListEnrollmentStatuses`,
+  `GetPreferences`, `ListCostAllocationTags`), so the setup can be confirmed with this role alone
+
 ## [0.2.0] - 2026-09-30
 
 ### Added
