@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: IAM role with read-only permissions for __COMPANY_NAME__
+
+Resources:
+  RootRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: __COMPANY_SHORT_NAME__ReadOnlyRole
+      Description: IAM role with read-only permissions for __COMPANY_NAME__
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: arn:aws:iam::__TRUSTED_ACCOUNT_ID__:root
+            Action: sts:AssumeRole
+            Condition: {}
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/ReadOnlyAccess
+        - arn:aws:iam::aws:policy/AWSBillingReadOnlyAccess
+      Policies:
+        # Minimal write actions needed to enable cost optimization tooling
+        # (opt-ins and cost allocation tags); no access to payments or resources
+        - PolicyName: __COMPANY_SHORT_NAME__CostOptimizationEnablement
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: EnrollCostOptimizationServices
+                Effect: Allow
+                Action:
+                  - compute-optimizer:UpdateEnrollmentStatus
+                  - cost-optimization-hub:UpdateEnrollmentStatus
+                  - cost-optimization-hub:UpdatePreferences
+                  - ce:UpdateCostAllocationTagsStatus
+                Resource: "*"
+              - Sid: CreateComputeOptimizerServiceLinkedRole
+                Effect: Allow
+                Action: iam:CreateServiceLinkedRole
+                Resource: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/compute-optimizer.amazonaws.com/AWSServiceRoleForComputeOptimizer*
+                Condition:
+                  StringLike:
+                    iam:AWSServiceName: compute-optimizer.amazonaws.com
+              - Sid: ConfigureComputeOptimizerServiceLinkedRole
+                Effect: Allow
+                Action: iam:PutRolePolicy
+                Resource: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/compute-optimizer.amazonaws.com/AWSServiceRoleForComputeOptimizer
+              - Sid: CreateCostOptimizationHubServiceLinkedRole
+                Effect: Allow
+                Action: iam:CreateServiceLinkedRole
+                Resource: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/cost-optimization-hub.bcm.amazonaws.com/AWSServiceRoleForCostOptimizationHub*
+                Condition:
+                  StringLike:
+                    iam:AWSServiceName: cost-optimization-hub.bcm.amazonaws.com

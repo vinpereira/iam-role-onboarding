@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: IAM role with administrator permissions for __COMPANY_NAME__
+
+Resources:
+  RootRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: __COMPANY_SHORT_NAME__AdminRole
+      Description: IAM role with administrator permissions for __COMPANY_NAME__
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: arn:aws:iam::__TRUSTED_ACCOUNT_ID__:root
+            Action: sts:AssumeRole
+            Condition: {}
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+        - arn:aws:iam::aws:policy/job-function/Billing

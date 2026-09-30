@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="version" content="__VERSION__">
+  <title>__COMPANY_NAME__ - IAM Roles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Fira Sans', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #1a1a2e;
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.8rem;
+      letter-spacing: 0.5px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      flex: 1;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .intro h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.8rem;
+    }
+
+    .intro p {
+      font-size: 1.1rem;
+      color: #5e5e5e;
+      line-height: 1.6;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #777;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9em 2em;
+      border-radius: 50px;
+      font-family: 'Fira Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .btn-admin {
+      background: #e8833a;
+      color: #fff;
+    }
+
+    .btn-admin:hover {
+      background: #d4722e;
+      border-color: #c0612a;
+    }
+
+    .btn-readonly {
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    .btn-readonly:hover {
+      background: #2d2d4a;
+      border-color: #e8833a;
+    }
+
+    .billing-section {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .billing-section h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.6rem;
+    }
+
+    .billing-section .btn-billing {
+      background: #fff;
+      color: #1a1a2e;
+      border: 2px solid #1a1a2e;
+      margin-bottom: 1.2rem;
+    }
+
+    .billing-section .btn-billing:hover {
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    .billing-instructions {
+      text-align: left;
+      background: #fef9f4;
+      border-left: 4px solid #e8833a;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-top: 1.2rem;
+    }
+
+    .billing-instructions p {
+      font-size: 0.9rem;
+      color: #5e5e5e;
+      line-height: 1.7;
+    }
+
+    .billing-instructions strong {
+      color: #d84e2b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #999;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .intro h2 {
+        font-size: 1.3rem;
+      }
+
+      .container {
+        padding: 2rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+
+      .btn {
+        padding: 0.8em 1.6em;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>__COMPANY_NAME__</h1>
+  </header>
+
+  <div class="container">
+    <div class="intro">
+      <h2>IAM Role Setup</h2>
+      <p>
+        Click one of the buttons below to open the AWS CloudFormation console and create the
+        required IAM role in your AWS account. You must be logged in to your AWS account first.
+      </p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Administrator Role</h3>
+        <p>Full administrator access including billing permissions for __COMPANY_NAME__ management.</p>
+        <a
+          class="btn btn-admin"
+          href="https://__REGION__.console.aws.amazon.com/cloudformation/home?region=__REGION__#/stacks/create/review?templateURL=https://__BUCKET_NAME__.s3.__REGION__.amazonaws.com/templates/admin-role.yaml&stackName=__COMPANY_SHORT_NAME__-Admin-Role"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Create Admin Role
+        </a>
+      </div>
+
+      <div class="card">
+        <h3>Read-Only Role</h3>
+        <p>Read-only access for __COMPANY_NAME__ monitoring, billing visibility, and cost optimization analysis of your AWS resources.</p>
+        <a
+          class="btn btn-readonly"
+          href="https://__REGION__.console.aws.amazon.com/cloudformation/home?region=__REGION__#/stacks/create/review?templateURL=https://__BUCKET_NAME__.s3.__REGION__.amazonaws.com/templates/readonly-role.yaml&stackName=__COMPANY_SHORT_NAME__-ReadOnly-Role"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Create ReadOnly Role
+        </a>
+      </div>
+    </div>
+
+    <div class="billing-section">
+      <h3>Enable Billing Access</h3>
+      <a
+        class="btn btn-billing"
+        href="https://us-east-1.console.aws.amazon.com/billing/home#/account"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Enable Billing Access
+      </a>
+
+      <div class="billing-instructions">
+        <p><strong>** Access must be performed using the account's root user.</strong></p>
+        <p>
+          <strong>** Instructions:</strong> Search for "IAM User and Role Access to Billing Information"
+          &gt; click "Edit" &gt; check "Activate IAM Access" &gt; and press "Update".
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 __COMPANY_NAME__. All rights reserved. &middot; v__VERSION__
+  </footer>
+</body>
+</html>
