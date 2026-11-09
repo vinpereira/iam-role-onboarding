@@ -91,7 +91,8 @@
     }
 
     .card p,
-    .setup-section p {
+    .setup-section p,
+    .billing-section > p {
       font-size: 0.95rem;
       color: #6b6b6b;
       margin-bottom: 1.5rem;
@@ -287,7 +288,13 @@
     </div>
 
     <div class="billing-section">
-      <h3>Enable Billing Access</h3>
+      <h3>Enable Billing Access (only if needed)</h3>
+      <p>
+        Only needed if __COMPANY_NAME__ should view billing and cost data in the AWS Billing console
+        (for example, with the Administrator role). It is not required to create the roles above, nor
+        for access to cost data through the AWS APIs. Accounts created through AWS Organizations
+        usually have it enabled already.
+      </p>
       <a
         class="btn btn-billing"
         href="https://us-east-1.console.aws.amazon.com/billing/home#/account"
@@ -298,7 +305,7 @@
       </a>
 
       <div class="billing-instructions">
-        <p><strong>** Access must be performed using the account's root user.</strong></p>
+        <p><strong>** This setting can only be changed by the account's root user.</strong></p>
         <p>
           <strong>** Instructions:</strong> Search for "IAM User and Role Access to Billing Information"
           &gt; click "Edit" &gt; check "Activate IAM Access" &gt; and press "Update".

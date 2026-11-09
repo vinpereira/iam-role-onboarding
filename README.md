@@ -9,7 +9,7 @@ console with a quick-create stack (the client must already be logged in to their
 | Create Admin Role | `<short>AdminRole` | `AdministratorAccess` + `job-function/Billing` |
 | Create ReadOnly Role | `<short>ReadOnlyRole` | `ReadOnlyAccess` + `AWSBillingReadOnlyAccess` (strictly read-only) |
 | Create Enablement Role | `<short>CostOptimizationEnablementRole` | Inline policy only: opt-in to Compute Optimizer and Cost Optimization Hub (incl. their service-linked roles) and cost allocation tags, plus read access to their enrollment status. One-time use — the client can delete the stack afterwards |
-| Enable Billing Access | — | Opens the Billing console so the root user can activate IAM access to billing information |
+| Enable Billing Access | — | Optional. Opens the Billing console so the root user can activate IAM access to billing information. Only needed for the roles to use the Billing and Cost Management **console**; the Cost Explorer, Budgets, and CUR APIs work without it, and accounts created through AWS Organizations usually have it enabled already |
 
 All roles trust the company's own AWS account.
 
@@ -34,7 +34,7 @@ the AWS root user of any account:
   directly in their own Billing console.
 
 In short: nothing here creates, uses, or requires the root user of the account that owns this page.
-The client's root user is only needed once, for a billing setting only the root user can change.
+The client's root user is only needed once, and only if the Billing console must be used, for a billing setting only the root user can change.
 
 ## Repository layout
 

@@ -59,3 +59,7 @@ Resources:
                 Condition:
                   StringLike:
                     iam:AWSServiceName: cost-optimization-hub.bcm.amazonaws.com
+              - Sid: ConfigureCostOptimizationHubServiceLinkedRole
+                Effect: Allow
+                Action: iam:PutRolePolicy
+                Resource: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:role/aws-service-role/cost-optimization-hub.bcm.amazonaws.com/AWSServiceRoleForCostOptimizationHub

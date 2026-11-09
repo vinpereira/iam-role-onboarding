@@ -5,6 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.3.1] - 2026-11-09
+
+### Changed
+- Enable Billing Access section on the page now says it is only needed for the Billing and Cost
+  Management console (not to create the roles nor for API access to cost data), and that accounts
+  created through AWS Organizations usually have it enabled already
+
+### Fixed
+- Enablement role: added `iam:PutRolePolicy` on `AWSServiceRoleForCostOptimizationHub`, which AWS
+  documents as required to opt in to Cost Optimization Hub
+
 ## [0.3.0] - 2026-09-30
 
 ### Added
